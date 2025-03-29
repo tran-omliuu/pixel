@@ -55,9 +55,13 @@ window.addEventListener('load', () => {
   const libraryImage = localStorage.getItem('selectedLibraryImage');
   if (libraryImage) {
     const img = new Image();
-    img.src = libraryImage;
+    img.src = libraryImage === 'pixelpals (4).png' ? 'nobg6.png' : libraryImage === 'pixelpals (5).png' ? 'nobg1.png' : libraryImage === 'pixelpals (6).png' ? 'nobg2.png' : libraryImage === 'pixelpals (7).png' ? 'nobg3.png' : libraryImage === 'pixelpals (8).png' ? 'nobg5.png' : libraryImage === 'pixelpals (9).png' ? 'nobg4.png' : libraryImage;
     img.onload = function() {
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      if (libraryImage === 'pixelpals (6).png') {
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      } else {
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      }
     };
     localStorage.removeItem('selectedLibraryImage');
   }
@@ -781,4 +785,19 @@ document.getElementById("selection").addEventListener("click", () => {
     selectTool("selection");
 });
 
-
+// Handle library image on main page load
+window.addEventListener('load', () => {
+  const libraryImage = localStorage.getItem('selectedLibraryImage');
+  if (libraryImage) {
+    const img = new Image();
+    img.src = libraryImage === 'pixelpals (4).png' ? 'nobg6.png' : libraryImage === 'pixelpals (5).png' ? 'nobg1.png' : libraryImage === 'pixelpals (6).png' ? 'nobg2.png' : libraryImage === 'pixelpals (7).png' ? 'nobg3.png' : libraryImage === 'pixelpals (8).png' ? 'nobg5.png' : libraryImage === 'pixelpals (9).png' ? 'nobg4.png' : libraryImage;
+    img.onload = function() {
+      if (libraryImage === 'pixelpals (6).png') {
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      } else {
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      }
+    };
+    localStorage.removeItem('selectedLibraryImage');
+  }
+});
