@@ -57,11 +57,24 @@ window.addEventListener('load', () => {
     const img = new Image();
     img.src = libraryImage === 'pixelpals (4).png' ? 'nobg6.png' : libraryImage === 'pixelpals (5).png' ? 'nobg1.png' : libraryImage === 'pixelpals (6).png' ? 'nobg2.png' : libraryImage === 'pixelpals (7).png' ? 'nobg3.png' : libraryImage === 'pixelpals (8).png' ? 'nobg5.png' : libraryImage === 'pixelpals (9).png' ? 'nobg4.png' : libraryImage;
     img.onload = function() {
-      if (libraryImage === 'pixelpals (6).png') {
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      const imgRatio = img.width / img.height;
+      const canvasRatio = canvas.width / canvas.height;
+      let drawWidth, drawHeight, offsetX = 0, offsetY = 0;
+
+      if (imgRatio > canvasRatio) {
+        // Image is wider than canvas
+        drawWidth = canvas.width;
+        drawHeight = canvas.width / imgRatio;
+        offsetY = (canvas.height - drawHeight) / 2;
       } else {
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        // Image is taller than canvas
+        drawHeight = canvas.height;
+        drawWidth = canvas.height * imgRatio;
+        offsetX = (canvas.width - drawWidth) / 2;
       }
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
     };
     localStorage.removeItem('selectedLibraryImage');
   }
@@ -574,7 +587,24 @@ document.getElementById('image-upload').addEventListener('change', function(e) {
       const img = new Image();
       img.src = event.target.result;
       img.onload = function() {
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        const imgRatio = img.width / img.height;
+        const canvasRatio = canvas.width / canvas.height;
+        let drawWidth, drawHeight, offsetX = 0, offsetY = 0;
+
+        if (imgRatio > canvasRatio) {
+          // Image is wider than canvas
+          drawWidth = canvas.width;
+          drawHeight = canvas.width / imgRatio;
+          offsetY = (canvas.height - drawHeight) / 2;
+        } else {
+          // Image is taller than canvas
+          drawHeight = canvas.height;
+          drawWidth = canvas.height * imgRatio;
+          offsetX = (canvas.width - drawWidth) / 2;
+        }
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
       };
     };
     reader.readAsDataURL(file);
@@ -792,11 +822,24 @@ window.addEventListener('load', () => {
     const img = new Image();
     img.src = libraryImage === 'pixelpals (4).png' ? 'nobg6.png' : libraryImage === 'pixelpals (5).png' ? 'nobg1.png' : libraryImage === 'pixelpals (6).png' ? 'nobg2.png' : libraryImage === 'pixelpals (7).png' ? 'nobg3.png' : libraryImage === 'pixelpals (8).png' ? 'nobg5.png' : libraryImage === 'pixelpals (9).png' ? 'nobg4.png' : libraryImage;
     img.onload = function() {
-      if (libraryImage === 'pixelpals (6).png') {
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      const imgRatio = img.width / img.height;
+      const canvasRatio = canvas.width / canvas.height;
+      let drawWidth, drawHeight, offsetX = 0, offsetY = 0;
+
+      if (imgRatio > canvasRatio) {
+        // Image is wider than canvas
+        drawWidth = canvas.width;
+        drawHeight = canvas.width / imgRatio;
+        offsetY = (canvas.height - drawHeight) / 2;
       } else {
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        // Image is taller than canvas
+        drawHeight = canvas.height;
+        drawWidth = canvas.height * imgRatio;
+        offsetX = (canvas.width - drawWidth) / 2;
       }
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
     };
     localStorage.removeItem('selectedLibraryImage');
   }
